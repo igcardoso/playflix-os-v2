@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="css/owl/owl.carousel.min.css">
+  <link rel="stylesheet" type="text/css" href="css/owl/owl.theme.default.min.css">
+  <title>Carrossel de Filmes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <style>
+    .owl-carousel .item {
+      margin: 10px;
+    }
+
+    .owl-carousel .item img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .owl-carousel .title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+
+    .owl-carousel .genere {
+      font-size: 14px;
+      margin: 5px 0;
+    }
+
+    .owl-carousel .reactions {
+      margin-top: 10px;
+    }
+
+    .owl-carousel .voteCont,
+    .owl-carousel .like {
+      font-size: 14px;
+      margin-right: 10px;
+    }
+
+    .owl-carousel .giving_play {
+      display: inline-block;
+      background-color: #007bff;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="navigable-element owl-carousel" id="carousel1"></div>
+  <div class="navigable-element owl-carousel" id="carousel2"></div>
+  <div class="navigable-element owl-carousel" id="carousel3"></div>
+  <div class="navigable-element owl-carousel" id="carousel4"></div>
+
+
+
+
+  <button onclick="moveFocus('left')">←</button>
+  <button onclick="moveFocus('right')">→</button>
+  <button onclick="moveFocus('up')">↑</button>
+  <button onclick="moveFocus('down')">↓</button>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script>
+
+    const elements = document.getElementsByClassName('navigable-element');
+    let currentIndex = 0;
+
+    function moveFocus(direction) {
+      if (direction === 'left') {
+        currentIndex = (currentIndex - 1 + elements.length) % elements.length;
+      } else if (direction === 'right') {
+        currentIndex = (currentIndex + 1) % elements.length;
+      } else if (direction === 'up') {
+        const numRows = Math.ceil(elements.length / 2);
+        currentIndex = (currentIndex - numRows + elements.length) % elements.length;
+      } else if (direction === 'down') {
+        const numRows = Math.ceil(elements.length / 2);
+        currentIndex = (currentIndex + numRows) % elements.length;
+      }
+
+      elements[currentIndex].focus();
+    }
+
+    // Definir o foco no primeiro elemento inicialmente
+    elements[0].focus();
+
+    var API_KEY = 'api_key=1cf50e6248dc270629e802686245c2c8';
+    var BASE_URL = 'https://api.themoviedb.org/3';
+    var API_URL_PAGE1 = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY + '&language=pt-BR&page=1';
+    var API_URL_PAGE2 = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY + '&language=pt-BR&page=2';
+    var API_URL_PAGE3 = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY + '&language=pt-BR&page=3';
+    var API_URL_PAGE4 = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY + '&language=pt-BR&page=4';
+
+    // Função para obter filmes e atualizar o carrossel
+    function getMoviesForCarousel(url, carousel) {
+      fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        if (data.results.length !== 0) {
+          updateCarousel(data.results, carousel);
+        }
+      });
+    }
+
+    // Função para atualizar o carrossel com filmes
+    function updateCarousel(movies, carousel) {
+      carousel.empty();
+
+      movies.forEach(movie => {
+        const {
+          title,
+          poster_path,
+          id,
+          backdrop_path,
+          vote_average,
+          vote_count,
+          genre_ids
+        } = movie;
+
+        const item = $('<div>').addClass('item');
+
+        const image = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + poster_path).attr('alt', title);
+        const caption = $('<p class="title">').text(title);
+        const genreNames = genre_ids.map(genreId => {
+          const genreObj = genres.find(genre => genre.id === genreId);
+          return genreObj ? genreObj.name: "";
+        });
+        const genre = $('<p class="genere">').text(genreNames.join(" | "));
+        const reactions = $('<div class="reactions">');
+        const info = $('<div class="info">');
+        const voteCont = $('<i class="bx bxs-star voteCont">').text("  " + vote_average);
+        const like = $('<i class="bx bxs-heart like">').text("  " + vote_count);
+        const giving_play = $('<button class="navigable giving_play">').html('<img src="/img/button-main-play.svg">').on('click', function() {
+          var DateId = id;
+          var url = "html/film_session.html";
+          url += "?DateId=" + encodeURIComponent(DateId);
+          window.location.href = url;
+        });
+
+        item.append(image);
+        item.append(info);
+        info.append(reactions);
+        info.append(caption);
+        info.append(genre);
+        reactions.append(voteCont);
+        reactions.append(like);
+        reactions.append(giving_play);
+        carousel.append(item);
+      });
+
+      carousel.owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        navText: [`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 19L8 12L15 5" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>`,
+          `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 5L16 12L9 19" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>`],
+        responsive: {
+          0: {
+            items: 2
+          },
+          480: {
+            items: 3
+          },
+          600: {
+            items: 4
+          },
+          780: {
+            items: 4
+          },
+          1000: {
+            items: 5
+          }
+        }
+      });
+    }
+
+    // Chamar a função para obter e exibir os filmes em cada carrossel
+    getMoviesForCarousel(API_URL_PAGE1, $('#carousel1'));
+    getMoviesForCarousel(API_URL_PAGE2, $('#carousel2'));
+    getMoviesForCarousel(API_URL_PAGE3, $('#carousel3'));
+    getMoviesForCarousel(API_URL_PAGE4, $('#carousel4'));
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!--<script src="js/app.js"></script>-->
+  <script src="js/owl/owl.carousel.min.js"></script>
+  <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

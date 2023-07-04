@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Visualização de TV com Console</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .tv-container {
+      position: relative;
+      width: 1280px;
+      height: 720px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .tv-screen {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .console {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #000;
+      color: #fff;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 14px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tv-container">
+    <iframe class="tv-screen" src="index.html"></iframe>
+  </div>
+
+  <div class="console">
+    <textarea id="console-output" rows="10" cols="80" readonly></textarea>
+  </div>
+
+  <script>
+    // Exemplo de utilização do console
+    console.log("Olá, console!");
+    console.warn("Atenção: este é apenas um exemplo.");
+
+    // Redirecionar a saída do console para a caixa de texto
+    console.log = function(message) {
+      var consoleOutput = document.getElementById("console-output");
+      consoleOutput.value += message + "\n";
+    };
+
+    console.warn = function(message) {
+      var consoleOutput = document.getElementById("console-output");
+      consoleOutput.value += "AVISO: " + message + "\n";
+    };
+  </script>
+</body>
+</html>
