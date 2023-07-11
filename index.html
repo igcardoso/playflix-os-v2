@@ -15,46 +15,52 @@
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
   <style type="text/css" media="all">
     body {
-	  overflow: hidden;
-	}
-  
+      overflow: hidden;
+      background-size: cover;
+      height: 100%;
+      background-image: url('https://image.tmdb.org/t/p/original/fCw8CVgII6W7ALbIh0SgXax3Hsj.jpg');
+      background-position: center;
+      background-repeat: repeat-y;
+      width: 100%;
+    }
+
     .background {
-	  width: 100%;
-	  heigth: 100%;
-	  object-fit: cover;
-	  position: fixed;
-	  top: 0;
-	  left: 0;
-	  z-index: -3;
-	}
-	
-	.gradient {
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  z-index: -1;	  
-	  width: 100%;
-	  height: 100vh;
-	  background: linear-gradient(to bottom,rgba(0,0,0,0.0) 0, rgba(0, 0, 0 , 0) 40%, #000 100%);
-	}
-	
-	.gradient-left {
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  z-index: -1;	  
-	  width: 100%;
-	  height: 100vh;
-	  background: linear-gradient(to left,rgba(0,0,0,0.0) 0, rgba(0, 0, 0 , 0) 40%, #000 100%);
-	}
-	.py-16 {
-	  z-index: 10;
-	}
-	
+      width: 100%;
+      heigth: 100%;
+      object-fit: cover;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -3;
+    }
+
+    .gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(to bottom,rgba(0,0,0,0.0) 0, rgba(0, 0, 0 , 0) 40%, #000 100%);
+    }
+
+    .gradient-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(to left,rgba(0,0,0,0.0) 0, rgba(0, 0, 0 , 0) 40%, #000 100%);
+    }
+    .py-16 {
+      z-index: 10;
+    }
+
     .owl-theme {
       position: relative;
     }
-	
+
     .owl-theme .item {
       width: 200px;
       height: 250px;
@@ -66,10 +72,6 @@
       align-content: center;
     }
 
-    .owl-theme .item:hover img {
-      transform: scale(1.2);
-    }
-
     .owl-theme .item img {
       width: 100%;
       height: 100%;
@@ -77,72 +79,14 @@
       transition: all .5s;
     }
 
-    .owl-theme .item .info .reactions {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-content: center;
-      width: 100%;
-      padding: 10px 0 10px 0;
-      background: #2a2a2a7d;
-      margin-bottom: 20px;
-      border-radius: 1.2em;
-    }
-
-    .owl-theme .item .info .reactions i {
-      margin: 0 10px 0 10px;
-      width: 100%;
-      text-align: center;
-      font-weight: 300;
-      cursor: pointer;
-    }
-
-    .owl-theme .item .info {
+    .owl-theme .item .giving_play {
       position: absolute;
-      bottom: -100%;
+      top: 0;
       left: 0;
       width: 100%;
-      background: #000000;
-      padding: 15px;
-      /*
-      background: rgba( 0, 0, 0, 0.25 );
-      box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-      backdrop-filter: blur(7.5px );
-      -webkit-backdrop-filter: blur(7.5px );*/
-      display: flex;
-      flex-direction: column;
-      justify-content: bottom;
-      transition: all .5s;
-      z-index: 9;
-    }
-
-    .owl-theme .item:hover .info {
-      bottom: 0;
-    }
-
-    .owl-theme .item .info .title {
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      padding: 0 20px 0 0;
-      text-align: left;
-    }
-    .owl-theme .item .info .genere {
-      font-weight: 300;
-      font-size: .7rem;
-	  text-align: left;
-    }
-
-    .owl-theme .item .giving_play {
-      width: 100%;
-      margin: 0 10px 0 10px;
-      cursor: pointer;
-    }
-
-    .owl-theme .giving_play img {
-      width: 100%;
-	  cursor: pointer;
-	  cursor: pointer;
+      height: 100vh;
+      background: none;
+      z-index: 100;
     }
 
     section {
@@ -151,82 +95,237 @@
       overflow-y: hidden;
       scroll-behavior: smooth;
       outline: none;
+      padding-left: 80px;
     }
 
-    nav li button {
+    nav ul li button span {
+      margin-left: 30px;
+    }
+
+    header nav ul .nav-element {
       background: none;
       border: none;
       opacity: .7;
       outline: none;
       transition: all .5s;
-      border-radius: 8em;
-      padding: 5px 10px 5px 10px;
+      margin-left: 8px;
+      padding: 8px 10px 5px 1.3rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-content: center;
+      width: 15rem;
+      border-left: 3px solid transparent;
+      font-weight: 500;
+      position: relative;
     }
 
     nav li button:focus {
       opacity: 1;
-      transform: scale(1.2);
-      background: #ffffff20;
       outline: none;
+      border-color: white;
     }
+
+    nav li button:focus::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(to left,rgba(0,0,0,0.0) 0, rgba(0, 0, 0 , 0) 70%, #ffffff 100%);
+      opacity: .2;
+    }
+
+    .logo {
+      position: fixed;
+      top: 35px;
+      left: 45%;
+      z-index: 100;
+    }
+
+    main {
+      padding-left: 80px;
+    }
+
+    header {
+      position: fixed;
+      top: 30px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      width: 5rem;
+      height: 100vh;
+      background: rgba(0,0,0,);
+      background-image: linear-gradient(to left, rgba(0,0,0,0.0) 0, rgba(0, 0, 0 , 0) 1%, #000 100%);
+      z-index: 100;
+      transition: all .3s;
+    }
+
+    header:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,);
+      background-image: linear-gradient(to left, rgba(0,0,0,0.0) 0, rgba(0, 0, 0 , 0) 1%, #000 100%);
+      z-index: -1;
+    }
+
+    header.active {
+      width: 15rem;
+    }
+
+    header nav ul {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      text-align: left;
+      padding: 70px 0 0 0;
+      overflow: hidden;
+      font-size: 1.5rem;
+    }
+
+    header div img {
+      margin: 40px 0 0 1.1rem;
+    }
+
+    input {
+      position: absolute;
+      right: 0;
+      z-index: 1000;
+      display: block;
+    }
+
+    .popularity {
+      color: #00ff16;
+    }
+
+    .plataforms {
+      position: absolute;
+      top: 80px;
+      right: 50px;
+      display: flex;
+      flex-direction: row;
+      border-left: 3px solid #5100ff;
+      padding-left: 20px;
+      font-weight: 600;
+      width: 0;
+      height: 20px;
+      transition: all 1s;
+      overflow: hidden;
+    }
+
+    .plataforms.animate {
+      width: 230px;
+    }
+   
   </style>
   <link href="http://fonts.cdnfonts.com/css/gilroy-medium" rel="stylesheet">
   <link href="http://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
-
-
 </head>
-
-<body class="font-gilroy-medium text-white">
+<body id="body" class="font-gilroy-medium text-white">
   <div class="gradient"></div>
   <div class="gradient-left"></div>
-  <img class="background" src="img/background.jpg" />
+  <!--<img class="background" src="img/background.jpg" />-->
   <div class="p-12">
-    <header class="backdrop-blur bg-black/50 rounded-3xl flex justify-between h-20 items-center px-12 py-5">
+    <input type="text" name="" id="" value="" />
+    <header class=" rounded-3xl">
       <div class="">
-        <img src="img/hbo-logo.svg" alt="">
+        <!--<img src="img/hbo-logo.svg" alt="">-->
       </div>
 
       <div class="font-gilroy-medium">
         <nav>
-          <ul class="flex text-xl gap-12">
+          <ul class="flex gap-12">
             <li>
-              <button class="nav-element">Movies</button>
+              <button class="nav-element">
+                <svg fill="#ffffff" width="26" height="26" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M30.814 13.051l-14.001-12c-0.217-0.187-0.502-0.3-0.813-0.3s-0.596 0.114-0.815 0.302l0.002-0.001-14 12c-0.268 0.23-0.437 0.57-0.437 0.948 0 0 0 0.001 0 0.001v-0 16c0 0.69 0.56 1.25 1.25 1.25h28c0.69-0.001 1.249-0.56 1.25-1.25v-16c-0-0.379-0.168-0.718-0.434-0.948l-0.002-0.001zM28.75 28.75h-25.5v-14.175l12.75-10.929 12.75 10.929z"></path>
+                </svg>
+                <span>Home</span>
+              </button>
             </li>
             <li>
-              <button class="nav-element">TV shows</button>
-            </li>
-            <li>
-              <button class="nav-element">Animations</button>
-            </li>
-            <li>
-              <button class="nav-element">Upgrade</button>
-            </li>
+              <button class="nav-element">
+                <svg width="28" height="28" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
+                  <g id="🔍-Product-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="ic_fluent_movies_and_tv_24_regular" fill="#ffffff" fill-rule="nonzero">
+                      <path d="M19.7286477,3.91709009 L19.7796475,4.07673953 L20.3309222,5.99926292 C20.4355805,6.36424991 20.2508505,6.74366136 19.9126449,6.89230405 L19.8167039,6.92693721 L9.08979429,10.0020329 L20.2488588,10.0029698 C20.6285546,10.0029698 20.9423498,10.2851237 20.9920122,10.6511993 L20.9988588,10.7529698 L20.9988588,19.2509821 C20.9988588,20.713514 19.8571542,21.9093864 18.4163811,21.9959633 L18.2488588,22.0009821 L5.75,22.0009821 C4.28746816,22.0009821 3.09159572,20.8592775 3.00501879,19.4185045 L3,19.2509821 L2.99979429,10.8590329 L2.47803395,9.03789737 C2.07490554,7.63202154 2.84275532,6.16777873 4.20385145,5.68742476 L4.36350088,5.63642498 L16.3781751,2.19127259 C17.7840509,1.78814418 19.2482937,2.55599396 19.7286477,3.91709009 Z M19.498,11.502 L4.5,11.502 L4.5,19.2509821 C4.5,19.8550436 4.92847749,20.3590287 5.4980814,20.4755866 L5.62219476,20.4945285 L5.75,20.5009821 L18.2488588,20.5009821 C18.8960675,20.5009821 19.4283927,20.0091075 19.4924052,19.3787874 L19.4988588,19.2509821 L19.498,11.502 Z M6.27268011,6.6494258 L4.77695691,7.07831752 C4.15481999,7.25671241 3.7786565,7.8762725 3.89085867,8.49982068 L3.91988247,8.62445396 L4.26421826,9.82529556 L4.55930489,9.74043653 L6.27268011,6.6494258 Z M11.029003,5.28557216 L8.31151617,6.06479896 L6.59814094,9.15580969 L9.31562776,8.37658289 L11.029003,5.28557216 Z M15.7862871,3.92144289 L13.0688003,4.70066969 L11.3554251,7.79168042 L14.0719506,7.01272925 L15.7862871,3.92144289 Z M17.6334765,3.68788446 L16.1127092,6.42755115 L18.6812212,5.6912865 L18.3377549,4.49019556 C18.2305941,4.11648136 17.96425,3.83153666 17.6334765,3.68788446 Z" id="🎨-Color">
 
+                      </path>
+                    </g>
+                  </g>
+                </svg>
+                <span>TV shows</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-element">
+                <svg width="26" height="26" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                    <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-256.000000, -1139.000000)" fill="#ffffff">
+                      <path d="M269.46,1163.45 C263.17,1163.45 258.071,1158.44 258.071,1152.25 C258.071,1146.06 263.17,1141.04 269.46,1141.04 C275.75,1141.04 280.85,1146.06 280.85,1152.25 C280.85,1158.44 275.75,1163.45 269.46,1163.45 L269.46,1163.45 Z M287.688,1169.25 L279.429,1161.12 C281.591,1158.77 282.92,1155.67 282.92,1152.25 C282.92,1144.93 276.894,1139 269.46,1139 C262.026,1139 256,1144.93 256,1152.25 C256,1159.56 262.026,1165.49 269.46,1165.49 C272.672,1165.49 275.618,1164.38 277.932,1162.53 L286.224,1170.69 C286.629,1171.09 287.284,1171.09 287.688,1170.69 C288.093,1170.3 288.093,1169.65 287.688,1169.25 L287.688,1169.25 Z" id="search" sketch:type="MSShapeGroup">
+
+                      </path>
+                    </g>
+                  </g>
+                </svg>
+                <span>Search</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-element">
+                <svg width="26" height="26" viewBox="0 -0.5 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Dribbble-Light-Preview" transform="translate(-379.000000, -240.000000)" fill="#ffffff">
+                      <g id="icons" transform="translate(56.000000, 160.000000)">
+                        <polygon id="plus-[#1512]" points="344 89 344 91 334.55 91 334.55 100 332.45 100 332.45 91 323 91 323 89 332.45 89 332.45 80 334.55 80 334.55 89">
+
+                        </polygon>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                <span>Upgrade</span>
+              </button>
+            </li>
           </ul>
         </nav>
       </div>
-
       <div class="">
         <img class="w-11" src="https://github.com/birobirobiro.png" alt="">
       </div>
     </header>
-
     <main class="py-16">
       <div>
         <p class="text-xl ">
           2021 | PG-13 | 2h 28m
         </p>
 
-        <h1 class="title_movie uppercase text-7xl font-gilroy-bold leading max-w-lg my-3">Spider-Man: No Way Home</h1>
+        <h1 class="title_movie uppercase text-7xl font-gilroy-bold max-w-lg my-3">
+          A PEQUENA SEREIA
+        </h1>
 
-        <h2 class="text-3xl mb-5">Action | Adventure | Fantasy</h2>
-
+        <h2 class="generes text-3xl mb-5">
+          Aventura | Família | Fantasia | Romance
+        </h2>
+        <p class="max-w-lg overview">
+          Ariel é uma curiosa sereia que deseja experimentar a vida em terra firme e, contra a vontade de seu pai, visita a superfície. Ariel se vê em uma inesperada jornada de autodescoberta ao encontrar um pr...
+        </p>
         <div class="flex gap-4">
           <img src="img/imdb-logo.svg" alt="">
-          <p class="text-2xl">
-            8.5
-          </p>
+          <span class="popularity text-2xl">
+            6.3%
+          </span>
+          <span class="plataforms">
+            <span class="platFText">Disney+</span>
+            <svg width="20px" height="20px" viewBox="-14.16 -14.16 52.32 52.32" fill="#5100ff" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.007 8.27C22.194 9.125 23 10.45 23 12c0 1.55-.806 2.876-1.993 3.73.24 1.442-.134 2.958-1.227 4.05-1.095 1.095-2.61 1.459-4.046 1.225C14.883 22.196 13.546 23 12 23c-1.55 0-2.878-.807-3.731-1.996-1.438.235-2.954-.128-4.05-1.224-1.095-1.095-1.459-2.611-1.217-4.05C1.816 14.877 1 13.551 1 12s.816-2.878 2.002-3.73c-.242-1.439.122-2.955 1.218-4.05 1.093-1.094 2.61-1.467 4.057-1.227C9.125 1.804 10.453 1 12 1c1.545 0 2.88.803 3.732 1.993 1.442-.24 2.956.135 4.048 1.227 1.093 1.092 1.468 2.608 1.227 4.05Zm-4.426-.084a1 1 0 0 1 .233 1.395l-5 7a1 1 0 0 1-1.521.126l-3-3a1 1 0 0 1 1.414-1.414l2.165 2.165 4.314-6.04a1 1 0 0 1 1.395-.232Z"></path></g></svg>
+          </span>
+
         </div>
       </div>
 
@@ -235,49 +334,32 @@
         Watch Now
       </button>
     </main>
-    <section>
+    <section class="view_content">
       <button tabindex="0" class="navigable-element owl-carousel  owl-theme section-indicacoes"></button>
       <button tabindex="0" class="navigable-element owl-carousel  owl-theme section-indicacoes"></button>
       <button tabindex="0" class="navigable-element owl-carousel  owl-theme section-indicacoes"></button>
     </section>
     <!--<section>
-      <h2 class="text-3xl font-gilroy-bold">New Releases</h2>
+                              <h2 class="text-3xl font-gilroy-bold">New Releases</h2>
 
-      <div class="m-5 flex gap-5 overflow-x-auto scrollbar-hide">
-        <img src="img/bottom-movies-1.png" alt="" class="cursor-pointer">
-        <img src="img/bottom-movies-2.png" alt="" class="cursor-pointer">
-        <img src="img/bottom-movies-3.png" alt="" class="cursor-pointer">
-        <img src="img/bottom-movies-4.png" alt="" class="cursor-pointer">
-        <img src="img/bottom-movies-1.png" alt="" class="cursor-pointer">
-        <img src="img/bottom-movies-2.png" alt="" class="cursor-pointer">
-        <img src="img/bottom-movies-3.png" alt="" class="cursor-pointer">
-      </div>
-    </section>-->
+                              <div class="m-5 flex gap-5 overflow-x-auto scrollbar-hide">
+                                <img src="img/bottom-movies-1.png" alt="" class="cursor-pointer">
+                                <img src="img/bottom-movies-2.png" alt="" class="cursor-pointer">
+                                <img src="img/bottom-movies-3.png" alt="" class="cursor-pointer">
+                                <img src="img/bottom-movies-4.png" alt="" class="cursor-pointer">
+                                <img src="img/bottom-movies-1.png" alt="" class="cursor-pointer">
+                                <img src="img/bottom-movies-2.png" alt="" class="cursor-pointer">
+                                <img src="img/bottom-movies-3.png" alt="" class="cursor-pointer">
+                              </div>
+                            </section>-->
   </div>
+
+  <img class="logo" src="img/hbo-logo.svg" alt="Playflix OS">
   <script>
-    const elements = document.getElementsByClassName('navigable-element');
-    const nav_elements = document.getElementsByClassName('nav-element');
-    let currentIndex = 0;
-    let nav_currentIndex = 0;
+    setTimeout(function() {
+      document.querySelector('.plataforms').classList.add('animate');
+    }, 1000);
 
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'ArrowUp') {
-        currentIndex = (currentIndex - 1 + elements.length) % elements.length;
-      } else if (event.key === 'ArrowDown') {
-        currentIndex = (currentIndex + 1) % elements.length;
-      } else if (event.key === 'ArrowLeft') {
-        nav_currentIndex = (nav_currentIndex - 1 + nav_elements.length) % nav_elements.length;
-      } else if (event.key === 'ArrowRight') {
-        nav_currentIndex = (nav_currentIndex + 1) % nav_elements.length;
-      }
-
-      elements[currentIndex].focus();
-      nav_elements[nav_currentIndex].focus();
-    });
-
-    // Definir o foco no primeiro elemento inicialmente
-    elements[0].focus();
-    nav_elements[0].focus();
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!--<script src="js/app.js"></script>-->
