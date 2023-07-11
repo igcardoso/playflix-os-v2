@@ -75,7 +75,8 @@
 }
 
 .owl-carousel .owl-nav button.owl-next,.owl-carousel .owl-nav button.owl-prev {
-  background: #ffffff;
+  border: 2px solid white;
+  background: none;
   padding: 0 0 0 5px !important;
   font: inherit;
   position: absolute;
@@ -86,10 +87,10 @@
 }
 
 .owl-carousel .owl-nav button.owl-prev {
-  left: -20px;
+  left: 0px;
 }
 .owl-carousel .owl-nav button.owl-next {
-  right: -20px;
+  right: 0px;
 }
 
 .owl-carousel.owl-loading {
