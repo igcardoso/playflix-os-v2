@@ -116,45 +116,101 @@ function updateCarousel(movies, carousel) {
       id,
       backdrop_path,
       vote_average,
+      overview,
       vote_count,
       genre_ids  // Added genre_ids property
     } = movie;
 
-    const item = $('<div>').addClass('item').hover(function() {
-      $('.background').attr('src', IMG_URL_PROMINENCE + backdrop_path);
-	  $('.title_movie').text(title);
-    });
+    const item = $('<div>').addClass('item');
 
     const image = $('<img>').attr('src', IMG_URL + poster_path).attr('alt', name);
-    const caption = $('<p class="title">').text(title);
-    // Get the genre names based on genre_ids
-    const genreNames = genre_ids.map(genreId => {
-      const genreObj = genres.find(genre => genre.id === genreId);
-      return genreObj ? genreObj.name: "";
-    });
+    const giving_play = $('<button class="navigable giving_play">').focus(function() {
+      document.querySelector('.plataforms').classList.remove('animate');
+      setTimeout(function() {
+        document.querySelector('.plataforms').classList.add('animate');
+      }, 1000);
+      $('#body').css({
+        background: `url(${IMG_URL_PROMINENCE + backdrop_path}), no-repeat center`, backgroundSize: 'cover'
+      });
+      $('.title_movie').text(title);
+      $('.overview').text(overview.substring(0, 200) + "...");
+      $('.popularity').text(vote_average + "%");
 
-    const genre = $('<p class="genere">').text(genreNames.join(" | "));
+      const genreNames = genre_ids.map(genreId => {
+        const genreObj = genres.find(genre => genre.id === genreId);
+        return genreObj ? genreObj.name: "";
+      });
 
-    const reactions = $('<div class="reactions">');
-    const info = $('<div class="info">');
-    const voteCont = $('<i class="bx bxs-star voteCont">').text("  " + vote_average);
-    const like = $('<i class="bx bxs-heart like">').text("  " + vote_count)
+      $('.generes').text(genreNames.join(" | "));
+      async function exibirPlataformaStreaming(filmeId) {
+        const detalhesUrl = `${BASE_URL}/movie/${filmeId}?${API_KEY}`;
 
-    const giving_play = $('<button class="navigable giving_play">').html('<img src="img/button-main-play.svg">').on('click', function() {
-      var DateId = id;
+        try {
+          const response = await fetch(detalhesUrl);
+          const data = await response.json();
+
+          const plataformas = data.production_companies.map(company => company.name);
+
+          $('.platFText').text(plataformas[0]);
+
+        } catch (error) {
+          console.error('Ocorreu um erro:', error);
+        }
+      }
+
+      exibirPlataformaStreaming(id);
+
+      /*var DateId = id;
       var url = "html/film_session.html";
       url += "?DateId=" + encodeURIComponent(DateId);
-      window.location.href = url;
+      window.location.href = url;*/
     });
 
+
+    const elementos = document.getElementsByClassName('navigable-element');
+    const elementosItem = $('.giving_play');
+    const elementosNav = document.getElementsByClassName('nav-element');
+    let indiceAtualCarrossel = 0;
+    let indiceAtualCarrossel_Item = 0;
+    let indiceAtual = 0;
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowUp') {
+        if (document.querySelector('header').classList.contains('active')) {
+          indiceAtual = (indiceAtual - 1 + elementosNav.length) % elementosNav.length;
+          elementosNav[indiceAtual].focus();
+        } else {
+          indiceAtualCarrossel = (indiceAtualCarrossel - 1 + elementos.length) % elementos.length;
+          elementos[indiceAtualCarrossel].focus();
+        }
+      } else if (event.key === 'ArrowDown') {
+        if (document.querySelector('header').classList.contains('active')) {
+          indiceAtual = (indiceAtual + 1) % elementosNav.length;
+          elementosNav[indiceAtual].focus();
+        } else {
+          indiceAtualCarrossel = (indiceAtualCarrossel + 1) % elementos.length;
+          elementos[indiceAtualCarrossel].focus();
+        }
+      } else if (event.key === 'ArrowRight') {
+        if (document.querySelector('header').classList.contains('active')) {
+          document.querySelector('header').classList.remove('active')
+        } else {
+          indiceAtualCarrossel_Item = (indiceAtualCarrossel_Item + 1) % elementosItem.length;
+          elementosItem[indiceAtualCarrossel_Item].focus();
+        }
+      } else if (event.key === 'ArrowLeft') {
+        if (!document.querySelector('header').classList.contains('active')) {
+          document.querySelector('header').classList.add('active');
+        }
+      }
+    });
+
+    elementos[0].focus();
+    elementosNav[0].focus();
+
+
     item.append(image);
-    item.append(info);
-    info.append(reactions);
-    info.append(caption);
-    info.append(genre);
-    reactions.append(voteCont);
-    reactions.append(like);
-    reactions.append(giving_play);
+    item.append(giving_play);
     carousel.append(item);
   });
 
@@ -165,10 +221,10 @@ function updateCarousel(movies, carousel) {
     nav: true,
     navText: [`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g id="Arrow / Chevron_Left">
-      <path id="Vector" d="M15 19L8 12L15 5" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />`,
+      <path id="Vector" d="M15 19L8 12L15 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />`,
       `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g id="Arrow / Chevron_Right">
-      <path id="Vector" d="M9 5L16 12L9 19" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />`],
+      <path id="Vector" d="M9 5L16 12L9 19" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />`],
     responsive: {
       0: {
         items: 2
