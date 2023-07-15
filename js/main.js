@@ -218,6 +218,7 @@ function updateCarousel(movies, carousel) {
   carousel.owlCarousel({
     loop: true,
     margin: 10,
+    focusOnSelect: true,
     nav: true,
     navText: [`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g id="Arrow / Chevron_Left">
